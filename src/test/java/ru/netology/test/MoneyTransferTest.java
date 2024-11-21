@@ -40,7 +40,7 @@ public class MoneyTransferTest {
     }
 
     @Test
-    void shouldErrorBalanca() {
+    void shouldErrorBalanc() {
         var LoginPage = new LoginPage();
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = LoginPage.validLogin(authInfo);
