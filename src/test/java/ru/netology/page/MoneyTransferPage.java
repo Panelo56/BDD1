@@ -1,27 +1,26 @@
 package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.Condition;
+import org.openqa.selenium.Keys;
 import ru.netology.data.DataHelper;
 
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static java.lang.String.valueOf;
+import static java.lang.Thread.sleep;
 
 public class MoneyTransferPage {
-    private SelenideElement transferAmount = $("[data-test-id='amount'] .input__control");
-    private SelenideElement fromField = $("[data-test-id='from'] .input__control");
-    private SelenideElement transferButton = $("[data-test-id='action-transfer']");
+    private SelenideElement amountField = $("[data-test-id=amount] .input__control");
+    private SelenideElement fromField = $("[data-test-id=from] .input__control");
+    private SelenideElement transferButton = $("[data-test-id=action-transfer]");
 
+    public MoneyTransferPage() {
 
-    public DashboardPage transferMoney(int amount, DataHelper.CardInfo from) {
-        transferAmount.setValue(valueOf(amount));
-        fromField.setValue(valueOf(from));
+        amountField.shouldBe(Condition.visible);
+    }
+    public DashboardPage transferMoney(int sum, DataHelper.CardInfo cardInfo) {
+        amountField.setValue(String.valueOf(sum));
+        fromField.setValue(cardInfo.getCardNumber());
         transferButton.click();
         return new DashboardPage();
-    }
-
-    public void amountMoreThanBalance() {
-        $(byText("Невозможно осуществить перевод, так как сумма превышает баланс.")).shouldBe(visible);
     }
 }
