@@ -18,10 +18,10 @@ jobs:
         run: chmod +x gradlew
       - name: Start SUT
         # Запускаем SUT,
-        # имя файла SUT будет отличаться в каждой задаче.
+        # имя файла SUT будет отличапшться в каждой задаче.
         # & означает, что в фоновом режиме не блокируем терминал для запуска тестов, 
         # обязательно должен быть для запуска SUT в CI
-        run: java -jar ./app-ibank-build-for-testers.jar &
+        run: java -jar ./artifacts/app-ibank-build-for-testers.jar  &
       - name: Build with Gradle
         # Запускаем автотесты
         # Для проектов на базе Selenide необходимо добавить параметр для запуска браузера
