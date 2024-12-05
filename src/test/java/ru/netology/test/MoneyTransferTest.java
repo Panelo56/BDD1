@@ -11,7 +11,6 @@ import static com.codeborne.selenide.Selenide.open;
 import static ru.netology.data.DataHelper.*;
 
 
-
 public class MoneyTransferTest {
 
     DashboardPage dashboardPage;
@@ -31,7 +30,7 @@ public class MoneyTransferTest {
         var firstCardBalance = dashboardPage.getCardBalance(getFirstCardNumber().getCardNumber());
         var secondCardBalance = dashboardPage.getCardBalance(getSecondCardNumber().getCardNumber());
         var transferPage = dashboardPage.depositToFirstCard();
-        var amount =generateValidAmount(firstCardBalance);
+        var amount = generateValidAmount(firstCardBalance);
         transferPage.transferMoney(amount, getSecondCardNumber());
         var expectedFirstCardBalanceAfter = firstCardBalance + amount;
         var expectedSecondCardBalanceAfter = secondCardBalance - amount;
@@ -50,6 +49,6 @@ public class MoneyTransferTest {
         var transferPage = dashboardPage.depositToFirstCard();
         int amount = DataHelper.generateInvalidAmount(secondCardBalance);
         transferPage.transferMoney(amount, DataHelper.getSecondCardNumber());
+        transferPage.findErrorNotification("Невозможно осуществить перевод, так как сумма превышает баланс.");
     }
-
 }
